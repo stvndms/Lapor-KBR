@@ -39,10 +39,6 @@ class PengaduanController extends Controller
         return redirect(route('dashboard'));
     }
 
-    public function showMasyarakat(Pengaduan $pengaduan)
-    {
-        return view('masyarakat.dashboard', compact('pengaduan'));
-    }
 
     public function indexMasyarakat()
     {

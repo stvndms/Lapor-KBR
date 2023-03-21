@@ -6,6 +6,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\TanggapanController;
 use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\PDFController;
 use GuzzleHttp\Middleware;
 
 /*
@@ -47,9 +49,11 @@ Route::resource('/dashboard/pengaduan', PengaduanController::class);
 Route::get('/pengaduan', [PengaduanController::class, 'indexMasyarakat'])->middleware('CheckGuard:masyarakat')->name('pengaduanMasyarakat');
 Route::put('/dashboard/pengaduan/{pengaduan:id_pengaduan}/verifikasi', [PengaduanController::class, 'verification'])->name('verification');
 
-
 // Tanggapan Route
 
 Route::get('/tanggapan', [TanggapanController::class, 'index'])->middleware('CheckGuard:petugas');
 Route::get('/tanggapan/{pengaduan:id_pengaduan}', [TanggapanController::class, 'create'])->middleware('CheckGuard:petugas')->name('tanggapan');
 Route::put('/tanggapan/{pengaduan:id_pengaduan}', [TanggapanController::class, 'store'])->name('beriTanggapan');
+
+//Print Laporan
+Route::get('generate-pdf', [PDFController::class, 'generatePDF'])->name('generate-pdf');

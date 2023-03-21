@@ -1,5 +1,8 @@
 @extends('layouts.masyarakat')
 
+@php
+    use App\Models\Tanggapan;
+@endphp
 
 @section('main')
     <main class="h-full pb-16 overflow-y-auto">
@@ -16,6 +19,7 @@
                             <th class="px-4 py-3">Isi Laporan</th>
                             <th class="px-4 py-3">Foto</th>
                             <th class="px-4 py-3">Status</th>
+                            <th class="px-4 py-3">Tanggapan</th>
                         
                         </tr>
                     </thead>
@@ -42,8 +46,11 @@
                             </td>
                             <td class="px-4 py-3 text-xs">
                                 @switch($item->status)
+                                    @case("0")
+                                    <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">Belum di-verifikasi  </span>
+                                    @break
                                     @case("proses")
-                                        <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">Sudah di-verifikasi  </span>
+                                        <span class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full dark:text-yellow-100 dark:bg-yellow-700">Sudah di-verifikasi  </span>
                                         @break
                                     @case("selesai")
                                         <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">Sudah ditanggapi</span>
@@ -51,7 +58,15 @@
                                     @default
                                 @endswitch
                             </td>
-
+                            <td>
+                            @php
+                                $tanggapan = Tanggapan::where('id_pengaduan', $item->id_pengaduan)->get();
+                                // dd($tanggapan->tanggapan);
+                            @endphp
+                            @foreach ($tanggapan as $t)
+                                {!! $t->tanggapan !!}
+                            @endforeach
+                            </td>
                         </tr>
                             
                         @endforeach

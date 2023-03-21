@@ -1,9 +1,18 @@
 @extends('layouts.admin')
 
+@php
+    use App\Models\Tanggapan;
+@endphp
 @section('main')
     <main class="h-full pb-16 overflow-y-auto">
     <div class="container grid px-6 mx-auto">
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Pengaduan</h2>
+        <a href="{{ route('generate-pdf') }}">
+            <button class="py-2 px-1 bg-blue-100 text-blue-700 rounded-full mb-2 ">
+                Cetak-PDF
+            </button>
+
+        </a>
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">
                 <table class="w-full whitespace-no-wrap">
@@ -15,7 +24,7 @@
                             <th class="px-4 py-3">Isi Laporan</th>
                             <th class="px-4 py-3">Foto</th>
                             <th class="px-4 py-3">Status</th>
-                            <th class="px-4 py-3">Edit</th>
+                            <th class="px-4 py-3">Tanggapan</th>
 
                         </tr>
                     </thead>
@@ -33,25 +42,31 @@
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 
-                            {{ $item->isi_laporan }}
+                            {!! $item->isi_laporan !!}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                <img src="{{ asset('storage/' . $item->foto) }}" alt="" class="w-20">
+                                <img src="{{ asset('storage/' . $item->foto) }}" alt="" class="w-20 h-20">
                             </td>
                             <td class="px-4 py-3 text-xs">
                                 @switch($item->status)
                                     @case('0')
-                                        <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">Belum di-verifikasi</span>
+                                        <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700 ">Belum di-verifikasi</span>
+                                        <div class="pt-2">
                                         <form method="post" action="{{ route('verification', $item->id_pengaduan) }}">
                                             @csrf
                                             @method('PUT')
                                             <button type="submit" class="px-2 py-1 font-semibold bg-sky-100 rounded-full text-sky-700 dark:text-sky-100 dark:bg-sky-700">Verifikasi</button>
                                         </form>
+                                        </div>
                                         @break
                                     @case("proses")
                                         <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">Sudah di-verifikasi</span>
+                                        <div class="pt-2">
                                         <a href="{{ route('tanggapan',$item->id_pengaduan) }}" class="px-2 py1
-                                            font-semibold leading-tight text-sky-300 bg-sky-100 rounded-full">Tanggapi</a>
+                                            font-semibold leading-tight text-sky-700 bg-sky-100 rounded-full "> <button>Tanggapi
+                                            </button>
+                                        </a>
+                                            </div>
                                         @break
                                     @case("selesai")
                                         <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">Sudah ditanggapi</span>
@@ -59,14 +74,14 @@
                                     @default
                                 @endswitch
                             </td>
-                            <td class="px-4 py-3">
-                                <div class="flex items-center space-x-4 text-sm">
-                                    <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Edit">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
-                                        </svg>
-                                    </button>
-                                </div>
+                            <td>
+                            @php
+                                $tanggapan = Tanggapan::where('id_pengaduan', $item->id_pengaduan)->get();
+                                // dd($tanggapan->tanggapan);
+                            @endphp
+                            @foreach ($tanggapan as $t)
+                                {!! $t->tanggapan !!}
+                            @endforeach
                             </td>
                         </tr>
                             

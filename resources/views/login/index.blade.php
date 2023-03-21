@@ -43,7 +43,7 @@
                     <button type="submit" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">Login</button>
                 </form>
                 <div class="text-center pt-12 pb-12">
-                    <p>Don't have an account? <a href="register.html" class="underline font-semibold">Register here.</a></p>
+                    <p>Don't have an account? <a href="{{ route('regis') }}" class="underline font-semibold">Register here.</a></p>
                 </div>
             </div>
 
