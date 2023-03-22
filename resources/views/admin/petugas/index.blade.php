@@ -3,7 +3,14 @@
 @section('main')
 <main class="h-full pb-16 overflow-y-auto">
     <div class="container grid px-6 mx-auto">
+
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Petugas</h2>
+        <!-- Complaint Succes -->
+        @if (session()->has('success'))
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:text-green-400" role="alert">
+                <span class="font-medium">{{ session('success') }}</span>
+            </div>
+        @endif
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">
                 <table class="w-full whitespace-no-wrap">
@@ -60,12 +67,12 @@
                                 </div>
                             </td>
                         </tr>
-                            
+
                         @endforeach
                     </tbody>
                 </table>
-            </div>    
-        </div>    
+            </div>
+        </div>
     </div>
 </main>
 @endsection

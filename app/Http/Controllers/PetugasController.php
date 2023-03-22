@@ -12,7 +12,7 @@ class PetugasController extends Controller
     {
 
         $petugas = Petugas::Paginate(5);
-        
+
         return view('admin.petugas.index', compact('petugas'));
     }
 
@@ -34,7 +34,7 @@ class PetugasController extends Controller
 
         $request['password'] = Hash::make($request['password']);
         Petugas::create($request->all());
-        return redirect(route('petugas.index'));
+        return redirect(route('petugas.index'))->with('success', 'Berhasil!');
     }
 
     public function edit(Petugas $petugas)
