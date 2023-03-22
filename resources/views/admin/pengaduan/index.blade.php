@@ -6,6 +6,9 @@
 @section('main')
     <main class="h-full pb-16 overflow-y-auto">
     <div class="container grid px-6 mx-auto">
+
+
+
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Pengaduan</h2>
         <a href="{{ route('generate-pdf') }}">
             <button class="py-2 px-1 bg-blue-100 text-blue-700 rounded-full mb-2 ">
@@ -40,7 +43,7 @@
                             <th class="px-4 py-3">Foto</th>
                             <th class="px-4 py-3">Status</th>
                             <th class="px-4 py-3">Tanggapan</th>
-
+                            <th class="px-4 py-3">Action</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -56,7 +59,7 @@
                                {{ $item->tgl_pengaduan }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                
+
                             {!! $item->isi_laporan !!}
                             </td>
                             <td class="px-4 py-3 text-sm">
@@ -75,7 +78,7 @@
                                         </div>
                                         @break
                                     @case("proses")
-                                        <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">Sudah di-verifikasi</span>
+                                        <span class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full dark:text-red-100 dark:bg-red-700">Sudah di-verifikasi</span>
                                         <div class="pt-2">
                                         <a href="{{ route('tanggapan',$item->id_pengaduan) }}" class="px-2 py1
                                             font-semibold leading-tight text-sky-700 bg-sky-100 rounded-full "> <button>Tanggapi
@@ -90,6 +93,7 @@
                                 @endswitch
                             </td>
                             <td>
+                            {!! $item->tanggapan->tanggapan !!}
                             @php
                                 $tanggapan = Tanggapan::where('id_pengaduan', $item->id_pengaduan)->get();
                                 // dd($tanggapan->tanggapan);
@@ -98,13 +102,16 @@
                                 {!! $t->tanggapan !!}
                             @endforeach
                             </td>
+                            <td>
+                                <a class="hover:text-purple-700" href="{{ route('pengaduan.show', $item->id_pengaduan) }}">Detail</a>
+                            </td>
                         </tr>
-                            
+
                         @endforeach
                     </tbody>
                 </table>
-            </div>    
-        </div>    
+            </div>
+        </div>
     </div>
 </main>
 @endsection

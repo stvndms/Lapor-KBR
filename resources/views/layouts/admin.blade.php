@@ -33,7 +33,7 @@
   </head>
   <body>
     <div
-      class="flex h-screen bg-gray-50 dark:bg-gray-900"
+      class="flex h-screen dark:bg-gray-900"
       :class="{ 'overflow-hidden': isSideMenuOpen }"
     >
       <!-- Desktop sidebar -->
@@ -42,7 +42,7 @@
       >
         <div class="py-4 text-gray-500 dark:text-gray-400">
           @if (Auth::guard('petugas')->user()->level === 'admin')
-              
+
           <a
             class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
             href="#"
@@ -61,7 +61,7 @@
             <li class="relative px-6 py-3">
                 @if (Request::is('dashboard'))
                     <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                    aria-hidden="true"></span>      
+                    aria-hidden="true"></span>
                 @endif
               <a
                 class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
@@ -89,7 +89,7 @@
             <li class="relative px-6 py-3">
                 @if (Request::is('dashboard/pengaduan'))
                     <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                    aria-hidden="true"></span>      
+                    aria-hidden="true"></span>
                 @endif
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -113,11 +113,11 @@
               </a>
             </li>
             @if (Auth::guard('petugas')->user()->level === 'admin')
-                
+
             <li class="relative px-6 py-3">
                 @if (Request::is('dashboard/petugas'))
                     <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                    aria-hidden="true"></span>      
+                    aria-hidden="true"></span>
                 @endif
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -145,7 +145,7 @@
             <li class="relative px-6 py-3">
                 @if (Request::is('dashboard/tanggapan'))
                     <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                    aria-hidden="true"></span>      
+                    aria-hidden="true"></span>
                 @endif
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -170,7 +170,7 @@
             </li>
           </ul>
           @if (Auth::guard('petugas')->user()->level === 'admin')
-              
+
           <div class="px-6 my-6">
             <button
               class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
@@ -180,7 +180,7 @@
             </button>
           </div>
           @else
-              
+
           @endif
         </div>
       </aside>
@@ -347,12 +347,12 @@
                 ></path>
               </svg>
             </button>
-            
+
             <!-- Search input -->
             <div class="flex justify-center flex-1 lg:mr-32">
                 @yield('search-bar')
             </div>
-            
+
             <ul class="flex items-center flex-shrink-0 space-x-6">
               <!-- Theme toggler -->
               <li class="flex">
@@ -390,7 +390,7 @@
                 </button>
               </li>
 
-                  
+
               <!-- Profile menu -->
               <li class="relative">
                 <button

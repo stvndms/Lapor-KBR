@@ -60,4 +60,9 @@ class PengaduanController extends Controller
         $pengaduan->update(['status' => 'proses']);
         return redirect(route('pengaduan.index'));
     }
+
+    public function detailPengaduan(Pengaduan $pengaduan)
+    {
+        return view('admin.pengaduan.show', compact('pengaduan'));
+    }
 }

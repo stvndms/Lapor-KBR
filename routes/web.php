@@ -30,22 +30,23 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth:petugas,masyarakat');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-// 
+//
 
 
 // register route
 Route::get('/register', [RegisterController::class, 'index'])->name('regis')->middleware('guest:masyarakat,petugas');
 Route::post('register', [RegisterController::class, 'store'])->name('register');
-// 
+//
 
 
 // Petugas Route
 Route::resource('/dashboard/petugas', PetugasController::class)->middleware('CheckGuard:petugas');
-// 
+//
 
 
 //  Pengaduan Route
-Route::resource('/dashboard/pengaduan', PengaduanController::class);
+Route::resource('/dashboard/pengaduan', PengaduanController::class)->except('show');
+Route::get('/dashboard/pengaduan/detail/{pengaduan:id_pengaduan}', [PengaduanController::class, 'detailPengaduan'])->name('pengaduan.show');
 Route::get('/pengaduan', [PengaduanController::class, 'indexMasyarakat'])->middleware('CheckGuard:masyarakat')->name('pengaduanMasyarakat');
 Route::put('/dashboard/pengaduan/{pengaduan:id_pengaduan}/verifikasi', [PengaduanController::class, 'verification'])->name('verification');
 
