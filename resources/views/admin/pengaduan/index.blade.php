@@ -11,8 +11,23 @@
             <button class="py-2 px-1 bg-blue-100 text-blue-700 rounded-full mb-2 ">
                 Cetak-PDF
             </button>
-
         </a>
+        <form action="">
+                    <select name="filter" id="">
+                        <option value="politik" @if(request()->filter == 'politik') selected @endif>Politik</option>
+                        <option value="agama" @if(request()->filter == 'agama') selected @endif>Agama</option>
+                        <option value="kejahatan" @if(request()->filter == 'kejahatan') selected @endif>Kejahatan</option>
+                        <option value="ekonomi" @if(request()->filter == 'ekonomi') selected @endif>Ekonomi</option>
+                        <option value="lainnya" @if(request()->filter == 'lainnya') selected @endif>Lainnya</option>
+                    </select>
+                    <button>filter</button>
+                </form>
+                 <form action="">
+                    <input type="date" name="date1" id="" value="{{ request()->date1 }}">
+                    <input type="date" name="date2" id="" value="{{ request()->date2 }}">
+                    <button>filter</button>
+                </form>
+
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">
                 <table class="w-full whitespace-no-wrap">

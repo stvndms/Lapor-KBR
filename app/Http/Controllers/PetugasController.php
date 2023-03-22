@@ -12,7 +12,7 @@ class PetugasController extends Controller
     {
 
         $petugas = Petugas::Paginate(5);
-
+        
         return view('admin.petugas.index', compact('petugas'));
     }
 

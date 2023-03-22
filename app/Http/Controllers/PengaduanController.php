@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pengaduan;
 use App\Models\Tanggapan;
-
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -13,13 +13,22 @@ use Illuminate\Http\RedirectResponse;
 
 class PengaduanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
         $pengaduan = Pengaduan::Paginate(5);
-        $tanggapan = Tanggapan::all();
-        return view('admin.pengaduan.index', compact('pengaduan', 'tanggapan'));
+        if ($request->filter) {
+            $pengaduan = Pengaduan::where('kategori', $request->filter)->get();
+        }
+        if ($request->date1 || $request->date2) {
+            $date1 = Carbon::parse(request()->date1)->toDateTimeString();
+            $date2 = Carbon::parse(request()->date2)->toDateTimeString();
+            $pengaduan = Pengaduan::whereDate('created_at', '>=', $date1)->WhereDate('created_at', '<=', $date2)->get();
+            // $complaints = Complaint::whereBetween('created_at', [$date1, $date2])->orWhere('created_at', [$date1, $date2])->get();
+        }
+        return view('admin.pengaduan.index', compact('pengaduan'));
     }
+
 
 
     public function store(Request $request)
