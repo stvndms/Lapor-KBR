@@ -182,10 +182,11 @@
                       <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
                         <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                       </svg>
+                      <img class="img-preview w-[400px]">
                       <div class="flex text-sm text-gray-600 items-center justify-center">
-                        <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-medium text-green focus-within:outline-none focus-within:ring-2">
+                        <label for="image" class="relative cursor-pointer rounded-md bg-white font-medium text-green focus-within:outline-none focus-within:ring-2">
                           <span>Upload a file</span>
-                          <input id="file-upload" name="foto" type="file" class="sr-only">
+                          <input id="image" name="foto" type="file" class="sr-only" onchange="previewImage()">
                         </label>
                       </div>
                       <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
@@ -197,9 +198,7 @@
     
               @if (Auth::guard('masyarakat')->check() == false)
                    <div class="bg-gray-50 px-4 py-3 text-right">
-                <button class="border-2 border-purple-800 rounded-md py-1 px-2 text-green hover:bg-purple-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-800 focus:ring-offset-2 w-full">
-                 <a href="/login"> Submit </a>
-                </button>
+                 <a href="/login" class=" block text-center border-2 border-purple-800 rounded-md py-1 px-2 text-green hover:bg-purple-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-800 focus:ring-offset-2 w-full">Submit</a>
               </div>
               @else
               <div class="bg-gray-50 px-4 py-3 text-right">
@@ -302,6 +301,17 @@
         }
         return false;
       }
+
+      function previewImage() {
+            const image = document.querySelector('#image');
+            const imgPreview = document.querySelector('.img-preview')
+            imgPreview.style.display = 'block';
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+            oFReader.onload = function(oFREvent) {
+                imgPreview.src = oFREvent.target.result;
+            }
+        }
     </script>
 </body>
 
