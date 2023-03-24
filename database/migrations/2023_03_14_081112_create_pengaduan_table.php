@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('id_pengaduan')->autoIncrement();
             $table->string('judul');
             $table->enum('kategori', ['politik', 'agama', 'kejahatan', 'ekonomi', 'lainnya']);
-            $table->date('tgl_pengaduan');
+            $table->dateTime('tgl_pengaduan');
             $table->char('nik', 16);
             $table->foreign('nik')->references('nik')->on('masyarakat')->onUpdate('cascade')->onDelete('cascade')->constrained();
             $table->text('isi_laporan');
